@@ -19,8 +19,8 @@ public abstract class StateMachine : MonoBehaviour
         if (_currentState != null)
         {
             _currentState.ExitState();
+        }
             _currentState = newState;
             _currentState.EnterState();
-        }
     }
 }
