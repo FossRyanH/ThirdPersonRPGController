@@ -1,11 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
+    [field: SerializeField]
+    public PlayerController PlayerController { get; private set; }
+    [field: SerializeField]
+    public float MovementSpeed { get; private set; }
+    [field: SerializeField]
+    public float RotationDamping { get; private set; }
+    [field: SerializeField]
+    public Animator Animator { get; private set; }
+
+    public Transform MainCameraTransform { get; private set; }
+
     void Start()
     {
-        SwitchState(new PlayerTestState(this));
+        MainCameraTransform = Camera.main.transform;
+        SwitchState(new PlayerFreeLookState(this));
     }
 }
