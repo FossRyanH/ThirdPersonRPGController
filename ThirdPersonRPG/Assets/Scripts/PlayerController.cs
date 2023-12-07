@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     public Vector2 MovementValue = new Vector2();
     public event Action JumpEvent;
     public event Action DodgeEvent;
-
     public event Action RunEvent;
+    public event Action TargetEvent;
+    public event Action CancelTargetEvent;
+
     Controls _controls;
 
     [Header("Movement")]
@@ -60,5 +62,17 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     {
         if (!context.performed) { return; }
         RunEvent?.Invoke();
+    }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+        TargetEvent?.Invoke();
+    }
+
+    public void OnCancelTarget(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+        CancelTargetEvent?.Invoke();
     }
 }

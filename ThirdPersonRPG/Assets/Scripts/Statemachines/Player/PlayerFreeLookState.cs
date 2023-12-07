@@ -13,7 +13,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void EnterState()
     {
-        // 
+        _stateMachine.PlayerController.TargetEvent += OnTarget;
     }
     
     public override void Tick(float deltaTime)
@@ -34,6 +34,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void ExitState()
     {
+        _stateMachine.PlayerController.TargetEvent -= OnTarget;
     }
 
     Vector3 CalcMovement()
@@ -53,5 +54,10 @@ public class PlayerFreeLookState : PlayerBaseState
     void FaceMovementDirection(Vector3 movementVector, float deltaTime)
     {
         _stateMachine.transform.rotation = Quaternion.Lerp(_stateMachine.transform.rotation, Quaternion.LookRotation(movementVector), deltaTime * _stateMachine.RotationDamping);
+    }
+
+    void OnTarget()
+    {
+        _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
 }
