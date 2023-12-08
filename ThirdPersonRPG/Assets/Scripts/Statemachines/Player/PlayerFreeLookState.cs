@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerFreeLookState : PlayerBaseState
 {
     readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
+    readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookMovement");
     const float AnimatorDampTime = 0.1f;
 
     public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -14,13 +15,16 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void EnterState()
     {
         _stateMachine.PlayerController.TargetEvent += OnTarget;
+        
+        _stateMachine.Animator.Play(FreeLookBlendTreeHash);
     }
     
     public override void Tick(float deltaTime)
     {
         Vector3 movementVector = CalcMovement();
 
-        _stateMachine.PlayerController.Rb.velocity = movementVector * _stateMachine.MovementSpeed;
+        // Takes the player Input and multiplies it by the states movement speed.
+        Move(movementVector);
 
         if (_stateMachine.PlayerController.MovementValue == Vector2.zero)
         {
@@ -58,6 +62,11 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnTarget()
     {
+        if (!_stateMachine.Targeter.SelectTarget())
+        {
+            return;
+        }
+
         _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
 }

@@ -18,13 +18,6 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
 
     Controls _controls;
 
-    [Header("Movement")]
-    public float RunSpeed = 6f;
-    public float SprintSpeed = 10f;
-
-
-    // Start is called before the first frame update
-
     // Start is called before the first frame update
     void Start()
     {
