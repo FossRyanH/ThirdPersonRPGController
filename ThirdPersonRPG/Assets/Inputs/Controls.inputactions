@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CancelTarget",
+                    "name": "Cancel",
                     "type": "Button",
                     "id": "4bc324b0-937c-4bdf-9e8e-7457c80a5d97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "3e050351-9869-46cc-b2e3-8edba453fd4d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -297,7 +306,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "CancelTarget",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -308,7 +317,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "CancelTarget",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c677bba4-8f2d-4618-9b25-b47628c75075",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99a39636-e833-443e-a326-ad1a5aeb6928",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

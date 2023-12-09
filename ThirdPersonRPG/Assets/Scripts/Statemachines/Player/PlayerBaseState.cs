@@ -13,7 +13,7 @@ public abstract class PlayerBaseState : State
 
     protected void Move(Vector3 motion)
     {
-        _stateMachine.PlayerController.Rb.velocity = (motion * _stateMachine.MovementSpeed);
+        _stateMachine.PlayerController.Rb.velocity = motion * _stateMachine.MovementSpeed;
     }
 
     protected void FaceTarget()

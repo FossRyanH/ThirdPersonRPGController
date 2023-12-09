@@ -14,7 +14,10 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
     public event Action DodgeEvent;
     public event Action RunEvent;
     public event Action TargetEvent;
-    public event Action CancelTargetEvent;
+    public event Action CancelEvent;
+
+    // Change this for an event later to create a combo chain reset if button isn't pressed in "x" amount of time.
+    public bool IsAttacking { get; private set; }
 
     Controls _controls;
 
@@ -63,9 +66,21 @@ public class PlayerController : MonoBehaviour, Controls.IPlayerActions
         TargetEvent?.Invoke();
     }
 
-    public void OnCancelTarget(InputAction.CallbackContext context)
+    public void OnCancel(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
-        CancelTargetEvent?.Invoke();
+        CancelEvent?.Invoke();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsAttacking = true;
+        }
+        else if (context.canceled)
+        {
+            IsAttacking = false;
+        }
     }
 }

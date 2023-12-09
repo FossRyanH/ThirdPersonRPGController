@@ -9,7 +9,14 @@ public class Targeter : MonoBehaviour
     CinemachineTargetGroup _cineTargetingGroup;
     List<Target> _targets = new List<Target>();
 
+    Camera _mainCamera;
+
     public Target CurrentTarget { get; private set; }
+
+    void Start()
+    {
+        _mainCamera = Camera.main;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -34,12 +41,36 @@ public class Targeter : MonoBehaviour
 
     public bool SelectTarget()
     {
+        Target closestTarget = null;
+        float closestTargetDistance = Mathf.Infinity;
         if (_targets.Count == 0)
         {
             return false;
         }
 
-        CurrentTarget = _targets[0];
+        foreach(Target target in _targets)
+        {
+            Vector2 viewPosition = _mainCamera.WorldToViewportPoint(target.transform.position);
+
+            if (viewPosition.x < 0f || viewPosition.x > 1f || viewPosition.y < 0f || viewPosition.y > 1f)
+            {
+                continue;
+            }
+
+            Vector2 centerScreen = viewPosition - new Vector2(0.5f, 0.5f);
+            if (centerScreen.sqrMagnitude < closestTargetDistance)
+            {
+                closestTarget = target;
+                closestTargetDistance = centerScreen.sqrMagnitude;
+            }
+        }
+
+        if (closestTarget == null)
+        {
+            return false;
+        }
+
+        CurrentTarget = closestTarget;
         _cineTargetingGroup.AddMember(CurrentTarget.transform, 1f, 2f);
 
         return true;
