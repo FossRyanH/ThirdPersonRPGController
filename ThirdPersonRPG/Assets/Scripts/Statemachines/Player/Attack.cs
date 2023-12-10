@@ -14,5 +14,7 @@ public class Attack
     public int ComboStateIndex { get; private set; } = -1;
     [field: SerializeField]
     public float ComboAttackTime { get; private set; }
+    [field: SerializeField]
+    public int DamageAmount { get; private set; }
 
 }

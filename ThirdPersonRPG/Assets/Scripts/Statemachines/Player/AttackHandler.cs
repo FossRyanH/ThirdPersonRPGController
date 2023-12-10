@@ -5,39 +5,15 @@ using UnityEngine;
 public class AttackHandler : MonoBehaviour
 {
     [SerializeField]
-    GameObject _rightHand;
-    [SerializeField]
-    GameObject _leftHand;
-    [SerializeField]
-    GameObject _rightFoot;
+    GameObject _damageHitBox;
 
-    void RightHook()
+    void AttackArea()
     {
-        _rightHand.SetActive(true);
+        _damageHitBox.SetActive(true);
     }
 
-    void DisableRightHand()
+    void AttackAreaDisable()
     {
-        _rightHand.SetActive(false);
-    }
-
-    void UpperCutLeft()
-    {
-        _leftHand.SetActive(true);
-    }
-
-    void DisableUppercut()
-    {
-        _leftHand.SetActive(false);
-    }
-
-    void Kick()
-    {
-        _rightFoot.SetActive(true);
-    }
-
-    void DisableFoot()
-    {
-        _rightFoot.SetActive(false);
+        _damageHitBox.SetActive(false);
     }
 }

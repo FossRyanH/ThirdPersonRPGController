@@ -19,8 +19,11 @@ public class PlayerStateMachine : StateMachine
     public Targeter Targeter { get; private set; }
     [field: SerializeField]
     public Attack[] Attacks { get; private set; }
+    [field: SerializeField]
+    public DamageDealer DamageDealer { get; private set; }
 
     public Transform MainCameraTransform { get; private set; }
+
 
     void Start()
     {

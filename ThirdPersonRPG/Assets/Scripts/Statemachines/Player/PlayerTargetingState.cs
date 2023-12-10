@@ -8,6 +8,8 @@ public class PlayerTargetingState : PlayerBaseState
     readonly int TargetingForwardHash = Animator.StringToHash("TargetingForwardSpeed");
     readonly int TargetingHorizontalHash = Animator.StringToHash("TargetingHorizontalSpeed");
 
+    float _crossFadeDuration = 0.15f;
+
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -16,7 +18,7 @@ public class PlayerTargetingState : PlayerBaseState
     {
         _stateMachine.PlayerController.CancelEvent += OnCancel;
 
-        _stateMachine.Animator.Play(TargetingBlendTreeHash);
+        _stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, _crossFadeDuration);
     }
     
     public override void Tick(float deltaTime)
