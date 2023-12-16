@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,27 +6,43 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    int _maxHealth = 100;
+    public float MaxHealth = 100f;
     [SerializeField]
-    int _currentHealth;
+    public float CurrentHealth;
+
+    public event Action OnTakeDamage;
+
+    public event Action OnRestoreHealth;
 
     // Start is called before the first frame update
     void Start()
     {
-        _currentHealth = _maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     public void DealDamage(int damageAmount)
     {
-        _currentHealth -= damageAmount;
+        CurrentHealth -= damageAmount;
         
-        _currentHealth = Mathf.Max(_currentHealth - damageAmount, 0);
+        CurrentHealth = Mathf.Max(CurrentHealth - damageAmount, 0);
 
-        if (_currentHealth <= 0)
+        OnTakeDamage?.Invoke();
+
+        if (CurrentHealth <= 0)
         {
             Destroy(this.gameObject, 0.25f);
         }
+    }
 
-        Debug.Log(_currentHealth);
+    public void RestoreHealth(float restoreAmount)
+    {
+        CurrentHealth += restoreAmount;
+
+        OnRestoreHealth?.Invoke();
+
+        if (CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
     }
 }

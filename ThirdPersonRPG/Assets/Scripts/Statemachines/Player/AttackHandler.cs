@@ -7,6 +7,11 @@ public class AttackHandler : MonoBehaviour
     [SerializeField]
     GameObject _damageHitBox;
 
+    void Start()
+    {
+        _damageHitBox.SetActive(false);
+    }
+
     void AttackArea()
     {
         _damageHitBox.SetActive(true);

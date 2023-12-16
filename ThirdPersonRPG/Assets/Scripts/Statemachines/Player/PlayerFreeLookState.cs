@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class PlayerFreeLookState : PlayerBaseState
         
         _stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, _crossFadeDuration);
     }
-    
+
+
     public override void Tick(float deltaTime)
     {
         if (_stateMachine.PlayerController.IsAttacking)
